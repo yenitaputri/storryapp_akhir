@@ -1,0 +1,954 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #0e6173;
+  --primary-text-color: #ffffff;
+  --primary-hover-color: #8ed7f4;
+  --primary-shadow-color: rgba(158, 219, 230, 0.3);
+
+  --secondary-color: #6badf4e9;
+  --secondary-text-color: #ffffff;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background-color: var(--secondary-color);
+  color: var(--secondary-text-color);
+  padding: 0.5rem 1rem;
+  z-index: 101;
+  transition: top 0.3s ease-in-out;
+}
+
+.skip-link:focus,
+.skip-link:focus-within {
+  transform: translateY(0%);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+.container {
+  padding-inline: 32px;
+  margin-inline: auto;
+  max-width: 1300px;
+}
+
+a,
+button {
+  min-height: 44px;
+  min-width: 44px;
+
+  color: var(#ffffff);
+}
+
+input,
+textarea,
+select {
+  transition: box-shadow 150ms ease-in-out;
+}
+
+input,
+textarea {
+  min-height: 44px;
+  min-width: 44px;
+  width: 100%;
+  padding: 12px 10px;
+  border-radius: 4px;
+  border: 1px solid #d4d4d4;
+
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+
+  resize: vertical;
+}
+
+input[type='radio'],
+input[type='checkbox'] {
+  min-height: auto;
+  min-width: auto;
+  width: auto;
+  display: inline;
+
+  transition: 150ms ease-in-out;
+}
+
+textarea {
+  min-height: 150px;
+}
+
+select {
+  display: inline-block;
+  border-radius: 4px;
+  padding-block: 8px;
+  padding-inline: 10px 20px;
+
+  font-size: 1rem;
+  line-height: 1rem;
+
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+}
+
+.btn {
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  padding: 10px 20px;
+  border: 1px solid var(--primary-color);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primary-text-color) !important;
+
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+}
+
+.btn:hover {
+  background-color: var(--primary-hover-color);
+}
+
+.btn[disabled] {
+  background-color: var(--primary-hover-color);
+  cursor: not-allowed;
+}
+
+.btn.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+
+  color: var(--primary-color) !important;
+}
+
+.btn.btn-outline:hover {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--primary-text-color) !important;
+}
+
+.btn.btn-transparent {
+  border: 1px solid #d4d4d4;
+  background-color: #ffffff;
+  color: #09090b !important;
+}
+
+.btn.btn-transparent:hover {
+  background-color: #d4d4d4;
+}
+
+.btn.btn-transparent:focus-visible {
+  outline: none;
+  border-color: var(--primary-shadow-color);
+  box-shadow: 0 0 0 4px var(--primary-shadow-color);
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--primary-shadow-color);
+}
+
+form > .form-control:not([hidden]) ~ .form-control:not([hidden]) {
+  margin-block-start: 30px;
+}
+
+form .form-control > :not([hidden]) ~ :not([hidden]) {
+  margin-block-start: 10px;
+}
+
+form .form-buttons {
+  margin-block-start: 30px;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Loader */
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  text-align: center;
+  animation: rotation 3s linear infinite;  /* Durasi 3 detik */
+}
+
+.loader::after {
+  content: '';
+  display: inline-block;
+  box-sizing: border-box;
+  width: 50px;
+  height: 50px;
+  border: 6px solid #d4d4d4aa;
+  border-bottom-color: var(--primary-color);
+  border-radius: 100%;
+
+  animation: rotation 1s linear infinite;
+}
+
+.loader.loader-absolute::after {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+
+i.loader-button {
+  animation: rotation 3s linear infinite;
+}
+
+/* HEADER */
+header {
+  background-color: var(--primary-color); 
+  color: var(--primary-text-color); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.main-header.container {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+/* Logo + teks di kiri */
+.brand-name {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit; 
+}
+
+/* Gambar logo */
+.brand-name__link__image {
+  height: 30px; 
+  margin-right: 0.5rem;
+}
+
+/* Teks logo */
+.brand-name__link__text {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Navigasi */
+.navigation-drawer {
+  display: flex;
+  gap: 1rem;
+}
+
+.navigation-drawer.open {
+  display: flex;
+}
+
+/* List nav */
+.nav-list {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-list li a {
+  display: block;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.nav-list li a:hover {
+  background-color: var(--primary-hover-color);
+  border-radius: 8px;
+}
+
+.nav-list li a[href="#/logout"] {
+  font-weight: bold;
+}
+
+/* Drawer button hanya muncul di mobile */
+.drawer-button {
+  background: none;
+  border: none;
+  color: var(--primary-text-color);
+  font-size: 2rem;
+  cursor: pointer;
+  display: none; 
+}
+
+.logout-button {
+  background: rgb(179, 239, 250); 
+  color: rgb(0, 73, 125) !important; 
+  padding: 0.75rem 1rem; 
+  font-size: inherit;
+  cursor: pointer;
+  display: block;
+  text-align: left;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  border-radius: 10px; 
+  font-weight: bold; 
+}
+
+.logout-button:hover {
+  background-color: red; 
+  color: white !important; 
+  border-color: red; 
+}
+
+/* MAIN */
+.main-content {
+  min-height: 70vh;
+}
+
+.main-content > :not([hidden]) ~ :not([hidden]) {
+  margin-block-start: 30px;
+}
+
+.main-content .section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  padding-block: 50px 40px;
+}
+
+.section-title {
+  color: var(--primary-color);
+}
+
+/* Container utama login */
+.login-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 2rem;
+}
+
+/* Container form login */
+.login-form-container {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Judul form login */
+.login__title {
+  font-size: 2rem;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Form login */
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container untuk setiap kontrol form (label + input) */
+.form-control {
+  margin-bottom: 1.5rem;
+}
+
+/* Label email dan password */
+.login-form__email-title,
+.login-form__password-title {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #495057;
+  font-weight: bold;
+}
+
+/* Container untuk input */
+.login-form__title-container {
+  position: relative; 
+}
+
+/* Input email dan password */
+.login-form__title-container input[type="email"],
+.login-form__title-container input[type="password"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.login-form__title-container input[type="email"]:focus,
+.login-form__title-container input[type="password"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.25);
+}
+
+/* Container untuk tombol-tombol form */
+.form-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Teks "Belum punya akun?" */
+.login-form__do-not-have-account {
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* Link "Daftar" */
+.login-form__do-not-have-account a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-form__do-not-have-account a:hover {
+  text-decoration: underline;
+}
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 2rem;
+}
+
+/* Container form register */
+.register-form-container {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Judul form register */
+.register__title {
+  font-size: 2rem;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Form register */
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container untuk setiap kontrol form */
+.form-control {
+  margin-bottom: 1.5rem;
+}
+
+/* Label nama lengkap, email, dan password */
+.register-form__name-title,
+.register-form__email-title,
+.register-form__password-title {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #495057;
+  font-weight: bold;
+}
+
+/* Container untuk input */
+.register-form__title-container {
+  position: relative;
+}
+
+/* Input nama lengkap, email, dan password */
+.register-form__title-container input[type="text"],
+.register-form__title-container input[type="email"],
+.register-form__title-container input[type="password"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.register-form__title-container input[type="text"]:focus,
+.register-form__title-container input[type="email"]:focus,
+.register-form__title-container input[type="password"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.25);
+}
+
+/* Container untuk tombol-tombol form */
+.form-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Teks "Sudah punya akun?" */
+.register-form__already-have-account {
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* Link "Masuk" */
+.register-form__already-have-account a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-form__already-have-account a:hover {
+  text-decoration: underline;
+}
+
+.register-form-container,
+.login-form-container {
+  max-width: 400px;
+  height: 100%;
+  margin-inline: auto;
+}
+
+.register-form,
+.login-form {
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.form-buttons.register-form__form-buttons,
+.form-buttons.login-form__form-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.register-form__already-have-account,
+.login-form__do-not-have-account {
+  text-align: center;
+}
+/* END OF LOGIN, REGISTER PAGE */
+
+/* HOME PAGE */
+.stories-list__container {
+  min-height: 400px;
+}
+
+.stories-list {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(200px, 1fr));
+  gap: 20px 15px;
+}
+
+.stories-list__empty,
+.stories-list__error {
+  text-align: center;
+}
+
+.story-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+}
+
+.story-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.story-item__image {
+  display: block;
+  width: 100%;
+  height: 250px;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+.story-item__body {
+  padding: 20px;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.story-item__main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.story-item__more-info {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+
+  color: #5d5d5d;
+}
+
+.story-item__createdat,
+.story-item__location,
+.story-item__author {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.story-item__description {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.story-item__read-more {
+  justify-self: start;
+  display: inline-flex;
+  gap: 5px;
+
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
+}
+
+.stories-list__map__container,
+.stories-list__map {
+  height: 400px;
+}
+
+.stories-list__map__container {
+  background-color: #f9f9f9;
+  padding: 0.5rem;
+  border-radius: 12px;
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.stories-list__map {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  max-height: 100%;
+}
+
+.stories-list__map__container,
+.stories-list__container {
+  position: relative;
+}
+
+/* END OF HOME PAGE */
+
+/* NEW story FORM */
+.new-story__header {
+  background-color: #f8f9fa;
+  padding: 2rem 0;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.new-story__header__title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.new-story__header__description {
+  color: var(--secondary-color);
+}
+
+/* form */
+.new-form__container {
+  background-color: #fff; 
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.new-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.new-form__description__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.new-form__description__container textarea {
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical; 
+}
+
+.new-form__description__container textarea::placeholder {
+  color: #6c757d;
+}
+
+/* New Documentations */
+.new-form__documentations__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+#documentations-more-info {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+}
+
+.new-form__documentations__container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.new-form__documentations__buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.new-form__documentations__input {
+  display: none;
+}
+
+.new-form__documentations__outputs {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+}
+
+.new-form__documentations__outputs li {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+}
+
+.new-form__documentations__outputs li img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+.new-form__camera__container {
+  padding: 20px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+
+  display: none;
+}
+
+.new-form__camera__container.open {
+  display: block;
+}
+
+.new-form__camera__video {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+
+.new-form__camera__canvas {
+  display: none;
+}
+
+.new-form__camera__tools {
+  margin-block: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px 16px;
+}
+
+.new-form__documentations__outputs-item__delete-btn {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+
+  cursor: pointer;
+}
+
+.new-form__documentations__outputs-item__delete-btn img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition: 150ms ease-in-out;
+}
+
+.new-form__documentations__outputs-item__delete-btn:hover img {
+  scale: 1.05;
+}
+
+/* New Locations */
+.new-form__location__map__container,
+.new-form__location__map {
+  height: 400px;
+  position: relative;
+}
+
+.new-form__location__map {
+  height: 100%;
+  width: 100%;
+}
+
+.new-form__location__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.new-form__location__container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.new-form__location__map__container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 300px;
+}
+
+.new-form__location__lat-lng {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.new-form__location__lat-lng input {
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 1rem;
+  flex-grow: 1;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+}
+/* END OF NEW story FORM */
+
+/* FOOTER */
+footer {
+  background-color: #f8f9fa;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+footer hr {
+  border: 1px solid #dee2e6;
+  margin: 1rem 0;
+}
+
+.footer-content.container {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  flex-direction: column;
+}
+
+.brand-name__link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #495057;
+}
+
+.brand-name__link__image {
+  height: 32px;
+  margin-right: 0.5rem;
+}
+
+.brand-name__link__text {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.footer-content {
+  padding-block: 20px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.copyright {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
